@@ -1,3 +1,11 @@
+> **Engine note (2026-10-26):** This report predates the library's integration
+> into TuxBooks and assumes MuPDF.js. TuxBooks uses **PDFium**
+> (`@embedpdf/pdfium`) in a Web Worker, and the fragment-shader curl
+> formulation supersedes the vertex-mesh plan below. See
+> `tuxbooks-integration-findings.md` first — it corrects the texture pipeline,
+> the curl math, the three.js recommendation, and adds context-loss handling.
+> The algorithmic survey and performance budgets here remain valid background.
+
 # Executive Summary
 
 Implementing a realistic 3D page-turn effect for TuxBooks (a React/Electron app using MuPDF.js) requires balancing visual fidelity, performance, and integration complexity. Existing libraries (e.g. **StPageFlip** and **OpenPageFlip**) demonstrate two common approaches: canvas-based and DOM/CSS-based flips. Canvas/WebGL solutions (Three.js or WebGL shaders) harness the GPU for smooth rendering, while CSS/DOM approaches leverage hardware-accelerated 3D transforms for simpler shapes. Mesh- or parametric-curl algorithms (cones, cylinders) can realistically deform pages; physics/spring-mesh models are possible but often overkill. We recommend a hybrid design: use WebGL (via Three.js or custom shaders) to render page meshes for maximum control and performance, with MuPDF providing bitmap textures at each page. Pages are rendered on-demand into textures (possibly mipmapped for quality) and mapped onto triangular meshes shaped by a cylindrical page-curl algorithm (with adjustable apex and angle parameters, per PARC research). This yields a realistic curl without the complexity of a full physics sim.
