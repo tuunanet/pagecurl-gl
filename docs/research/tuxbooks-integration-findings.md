@@ -46,7 +46,7 @@ Two PDFium-side facts the library must respect:
 ## ImageBitmap upload: fine, but budget for jank
 
 The intended path (worker → `ImageBitmap` → `texImage2D`) is the one
-`ImageBitmap` was designed for; browsers *may* blit it to the GPU without a
+`ImageBitmap` was designed for; browsers _may_ blit it to the GPU without a
 CPU round-trip. But it is not free and not guaranteed jank-free (see the
 WebGLFundamentals Q&A, scraped 2026-10-26):
 
@@ -59,7 +59,7 @@ WebGLFundamentals Q&A, scraped 2026-10-26):
 - Mitigations, in order of preference for this library: (1) upload at most one
   texture per frame during a flip, (2) cap texture resolution to display size ×
   DPR, not to PDF native size, (3) defer the next-page upload to the frame
-  *after* the current flip starts.
+  _after_ the current flip starts.
 
 The performance budget from the original report carries over unchanged:
 ≥30 FPS floor, ~60 FPS target, GPU time <5 ms/frame.
@@ -83,7 +83,7 @@ tesselation at all** (a single quad), and reduces to pure trigonometry:
   through `dragPos`. For keyboard-driven flips (no drag), animate `dragPos`
   across the page over time instead.
 
-This drops `meshResolution` from the `PageFlipSettings` API entirely and
+This drops `meshResolution` from the `PageCurlSettings` API entirely and
 removes the vertex-deformation path. Keep the PARC/cylinder notes in the
 original report as background, but implement against the fragment-shader
 form. A working reference lives at

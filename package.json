@@ -1,11 +1,10 @@
 {
-  "name": "pageflip-wasm",
+  "name": "pagecurl-gl",
   "version": "0.0.0",
-  "description": "Realistic 3D page-flip effect for React frontends, powered by WebGL page-curl meshes.",
+  "description": "Page-curl page turns for React frontends, rendered with WebGL2 fragment-shader deformation.",
   "keywords": [
     "3d",
     "flipbook",
-    "mupdf",
     "page-curl",
     "page-flip",
     "pdf",

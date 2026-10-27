@@ -1,15 +1,16 @@
 /**
- * Public types for the page-flip library.
+ * Public types for the pagecurl library.
  *
- * The design follows the recommended API from the research report
- * (see docs/research/deep-research-report.md): a headless flip controller driven by a
- * WebGL cylindrical page-curl mesh, with page bitmaps (e.g. rendered by
- * MuPDF.js) supplied as textures.
+ * The design follows the recommended API from the research docs (see
+ * docs/research/tuxbooks-integration-findings.md, which corrects the original
+ * survey in deep-research-report.md): a headless flip controller driven by a
+ * WebGL2 fragment-shader page curl, with page bitmaps (e.g. rendered by
+ * PDFium) supplied as textures.
  */
 
 export type FlipDirection = "next" | "prev";
 
-export interface PageFlipSettings {
+export interface PageCurlSettings {
   /** Base page width in CSS px. */
   width: number;
   /** Base page height in CSS px. */
@@ -29,7 +30,7 @@ export interface PageTextureSource {
   height: number;
 }
 
-export interface PageFlipAPI {
+export interface PageCurlAPI {
   flipNext(): void;
   flipPrev(): void;
   flipTo(pageIndex: number): void;

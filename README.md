@@ -1,20 +1,22 @@
-# pageflip-wasm
+# pagecurl-gl
 
-A MIT-licensed React library for realistic **3D page-flip (page-curl) effects**,
-designed to pair with WASM PDF renderers such as MuPDF.js.
+A MIT-licensed React library for realistic **page-curl page turns**, rendered
+with WebGL2 fragment-shader deformation (no vertex mesh, no 3D-library
+dependency). Built for TuxBooks, which feeds it PDF page bitmaps as
+`ImageBitmap` textures from PDFium.
 
-Pages are rendered to textures on demand and deformed on the GPU using a
-cylindrical page-curl mesh (parametric curl model), targeting 60 FPS with
-low CPU load. See `docs/research/deep-research-report.md` for the full research and design
-rationale.
+Pages are deformed on the GPU with a cylindrical curl model, targeting 60 FPS
+with low CPU load. `docs/research/tuxbooks-integration-findings.md` records the
+engine, texture, and shader decisions that TuxBooks' integration requires;
+`docs/research/deep-research-report.md` is the original survey it corrects.
 
 ## Status
 
-Early scaffold. Planned features (per the research report):
+Early scaffold. Planned features (per the research docs):
 
-- WebGL cylindrical page-curl vertex-shader deformation
+- WebGL2 fragment-shader cylinder deformation
 - Drag/touch corner-grab with momentum-based release
-- On-demand texture loading with LRU eviction (MuPDF.js integration)
+- On-demand texture loading with LRU eviction (PDFium `ImageBitmap` integration)
 - React component + headless core API (`flipNext`, `flipPrev`, `flipTo`)
 - Keyboard accessibility and flip lifecycle events
 
